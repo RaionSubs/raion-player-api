@@ -28,7 +28,6 @@ app.use(
 );
 app.use(cors());
 app.disable("x-powered-by");
-app.use("/videos",express.static('public'))
 
 app.use(function (req: Request, res: Response, next: NextFunction) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -40,6 +39,7 @@ app.use(function (req: Request, res: Response, next: NextFunction) {
         "Access-Control-Allow-Methods",
         "GET, POST, PATCH, PUT, OPTIONS"
     );
+    res.header("Cross-Origin-Resource-Policy", "cross-origin");
     next();
 });
 

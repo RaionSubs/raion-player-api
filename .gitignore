@@ -6,3 +6,6 @@ dist
 
 # Config
 .env
+
+# Data
+json.sqlite
