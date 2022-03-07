@@ -1,5 +1,5 @@
 import { Router, Response, Request } from 'express';
-import axios, { AxiosResponse } from "axios";
+import fs from "fs";
 import randomString from "random-string";
 import multer from "multer";
 import Path from "path";
@@ -97,11 +97,14 @@ apiRouter.get("/video", async (req: Request, res: Response): Promise<any> => {
     });
 
     if (!getVideo) {
-        return res.status(200).json({ content: "Video not found", code: 501 });
+        return res.status(200).json({ content: "Video not found!", code: 501 });
     };
 
-
-    return res.status(200).sendFile(Path.resolve("public", getVideo.videoId + ".mp4"));
+    if (fs.existsSync(Path.resolve("public", getVideo.videoId + ".mp4"))) {
+        return res.status(200).sendFile(Path.resolve("public", getVideo.videoId + ".mp4"));
+    } else {
+        return res.status(200).json({ content: "Video not found!", code: 501 });
+    };
 
 });
 
