@@ -19,8 +19,8 @@ const io = require('socket.io')(http, {
     }
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: "1gb" }));
+app.use(express.urlencoded({ extended: false, limit: "1gb" }));
 app.use(
     helmet({
         contentSecurityPolicy: false,
