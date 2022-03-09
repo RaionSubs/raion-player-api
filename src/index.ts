@@ -6,6 +6,7 @@ import helmet from "helmet";
 import cors from "cors";
 import routes from './routes';
 import { Socket } from 'socket.io';
+import busboy from "connect-busboy";
 
 const app = express();
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -28,6 +29,9 @@ app.use(
 );
 app.use(cors());
 app.disable("x-powered-by");
+app.use(busboy({
+    highWaterMark: 1073741824
+}));
 
 app.use(function (req: Request, res: Response, next: NextFunction) {
     res.header("Access-Control-Allow-Origin", "*");
